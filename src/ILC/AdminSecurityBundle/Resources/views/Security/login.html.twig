@@ -1,0 +1,37 @@
+{% extends 'ILCAdminSecurityBundle::template.html.twig' %}
+{% block left %}{%  endblock %}
+{% block main %}
+<br/><br/>
+<h2>Identification :</h2>
+{% for flashMessage in app.session.flashbag.get('info') %}
+<div class="msgDivinfo">{{ flashMessage|trans|raw }}</div><br/>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('err') %}
+<div class="msgDiverr">{{ flashMessage|trans|nl2br|raw }}</div><br/>
+{% endfor %}
+{{form_start(LoginForm, {'method':'POST', 'action': path('_security_check')})}}
+<table>
+	<tr>
+		<th align="right">{{ form_label(LoginForm.username) }} :  &nbsp; </th>
+		<td>{{ form_widget(LoginForm.username,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(LoginForm.username) %}
+	<tr>
+		<td colspan="2">{{ form_errors(LoginForm.username) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<th align="right"> {{ form_label(LoginForm.password) }} :  &nbsp; </th>
+		<td>{{ form_widget(LoginForm.password,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(LoginForm.password) %}
+	<tr>
+		<td colspan="2">{{ form_errors(adm_form.password) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<th colspan="2">{{form_row(LoginForm.target_path, {'label_col': 0, 'widget_col': 12})}} <input type="submit" value=" {{ 'user.loginbtn'|trans }} " /> </th>
+	</tr>
+</table>
+{{form_end(LoginForm)}}
+{%  endblock %}

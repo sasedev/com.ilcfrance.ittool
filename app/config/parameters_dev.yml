@@ -1,0 +1,6 @@
+# This file is auto-generated during the composer install
+parameters:
+    scheme: http
+    domain_com_ilcfrance_ittool: ittool.ilcfrance.predator.loc
+    mail_from: "system@%domain_com_ilcfrance_ittool%"
+    mailer_transport: sendmail

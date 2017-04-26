@@ -1,0 +1,76 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Modifier Mon profile et mon mot de passe</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>Mon Profile</h2>
+<br/>
+Identifiant : <b>{{ admin.username }}</b><br/>
+Nom : <b>{{ admin.name }}</b><br/>
+Email: <b>{{ admin.email }}</b><br/>
+<br/><br/>
+<h2> Modifier mon profile</h2>
+<br/>
+{{form_start(profile_form, {'method':'POST', 'action': path('_security_profile')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(profile_form.name) }} : </td>
+		<td>{{ form_widget(profile_form.name,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(profile_form.name) %}
+	<tr>
+		<td colspan="2">{{ form_errors(profile_form.name) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(profile_form.email) }} : </td>
+		<td>{{ form_widget(profile_form.email,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(profile_form.email) %}
+	<tr>
+		<td colspan="2">{{ form_errors(profile_form.email) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(profile_form)}}
+<br/>
+<h2>Modifier Mon Mot de Passe</h2>
+<br/>
+{{form_start(passwd_form, {'method':'POST', 'action': path('_security_updatepass')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(passwd_form.password.passwd) }} : </td>
+		<td>{{ form_widget(passwd_form.password.passwd,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(passwd_form.password) %}
+	<tr>
+		<td colspan="2">{{ form_errors(passwd_form.password) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ 'adm.cpasswd'|trans }} : </td>
+		<td>{{ form_widget(passwd_form.password.cpasswd,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(passwd_form.password.cpasswd) %}
+	<tr>
+		<td colspan="2">{{ form_errors(passwd_form.password.cpasswd) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(passwd_form)}}
+<br/>
+{% endblock %}

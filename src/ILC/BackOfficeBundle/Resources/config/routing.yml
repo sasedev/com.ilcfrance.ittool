@@ -1,0 +1,266 @@
+bo_home:
+    path:  /
+    defaults: { _controller: "ILCBackOfficeBundle:Default:index" }
+
+bo_admin_list:
+    path: /admins
+    defaults: { _controller: "ILCBackOfficeBundle:Admin:index" }
+
+bo_admin_add:
+    path: /admin/add
+    defaults: { _controller: "ILCBackOfficeBundle:Admin:add" }
+
+bo_admin_show:
+    path: /admin/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Admin:show" }
+    methods: [GET]
+    requirements:
+        id:  \d+
+
+bo_admin_edit:
+    path: /admin/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Admin:edit" }
+    methods: [POST]
+    requirements:
+        id:  \d+
+
+bo_admin_editpass:
+    path: /admin/editpass/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Admin:editpass" }
+    methods: [POST]
+    requirements:
+        id:  \d+
+
+bo_admin_del:
+    path: /admin/del/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Admin:del" }
+    requirements:
+        id:  \d+
+
+_security_profile:
+    path: /profile
+    defaults: { _controller: "ILCBackOfficeBundle:Security:profile" }
+
+
+
+_security_updatepass:
+    path: /updatepass
+    defaults: { _controller: "ILCBackOfficeBundle:Security:updatepass" }
+    methods: [POST]
+
+bo_groupemodules_list:
+    path:  /modules
+    defaults: { _controller: "ILCBackOfficeBundle:Groupmodule:index" }
+
+
+bo_groupemodules_add:
+    path:  /gm_add
+    defaults: { _controller: "ILCBackOfficeBundle:Groupmodule:add" }
+
+
+bo_groupemodules_edit:
+    path:  /gm_edit/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Groupmodule:edit" }
+    requirements:
+        id:  \d+
+
+
+bo_groupemodules_del:
+    path:  /gm_del/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Groupmodule:del" }
+    requirements:
+        id:  \d+
+
+bo_modules_export:
+    path:  /modules_export
+    defaults: { _controller: "ILCBackOfficeBundle:Module:export" }
+
+bo_module_add:
+    path:  /module_add
+    defaults: { _controller: "ILCBackOfficeBundle:Module:add" }
+
+
+bo_module_show:
+    path:  /module_show/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Module:show" }
+    requirements:
+        id:  \d+
+
+
+bo_module_edit:
+    path:  /module_edit/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Module:edit" }
+    methods: [POST]
+    requirements:
+        id:  \d+
+
+
+bo_module_del:
+    path:  /module_del/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Module:del" }
+    requirements:
+        id:  \d+
+
+
+
+bo_session_bydate:
+    path:  /session_bydate
+    defaults: { _controller: "ILCBackOfficeBundle:Session:byDate" }
+
+
+bo_session_add:
+    path:  /session_add
+    defaults: { _controller: "ILCBackOfficeBundle:Session:add" }
+
+
+bo_session_edit:
+    path:  /session_edit/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Session:edit" }
+    methods: [POST]
+    requirements:
+        id:  \d+
+
+
+bo_session_del:
+    path:  /session_del/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Session:del" }
+    requirements:
+        id:  \d+
+
+
+bo_session_show:
+    path:  /session_show/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Session:show" }
+    requirements:
+        id:  \d+
+
+bo_session_convocation:
+    path:  /session_convocation/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Session:convocation" }
+    requirements:
+        id:  \d+
+
+bo_session_convocationfull:
+    path:  /session_convocationfull/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Session:convocationfull" }
+    requirements:
+        id:  \d+
+
+
+bo_stagiaire_list:
+    path:  /stagiaires/{page}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:list", page: 1 }
+    requirements:
+        page:  \d+
+
+
+
+bo_stagiaire_add:
+    path:  /stagiaire_add
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:add" }
+
+
+
+bo_stagiaire_import:
+    path:  /stagiaires_import
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:import" }
+
+bo_stagiaires_sendmailParams:
+    path:  /stagiaires_sendmailPrams
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:sendmailParams" }
+
+
+
+bo_stagiaire_show:
+    path:  /stagiaire_show/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:show" }
+    requirements:
+        id:  \d+
+
+bo_stagiaire_del:
+    path:  /stagiaire_del/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:del" }
+    requirements:
+        id:  \d+
+
+bo_stagiaire_rem_module:
+    path:  /stagiaire_remmod/{id}/{mod}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:remMod" }
+    requirements:
+        id:  \d+
+        mod:  \d+
+
+bo_stagiaire_rem_session:
+    path:  /stagiaire_remsess/{id}/{ses}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:remSess" }
+    requirements:
+        id:  \d+
+        ses:  \d+
+
+bo_stagiaire_update_modules:
+    path:  /stagiaire_updatemods/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:updateMod" }
+    methods: [POST]
+    requirements:
+        id:  \d+
+
+bo_stagiaire_update_sessions:
+    path:  /stagiaire_updatesess/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:updateSess" }
+    methods: [POST]
+    requirements:
+        id:  \d+
+        
+bo_stagiaire_search:
+    path:  /stagiaire_search/{page}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:search", page: 1 }
+    requirements:
+        page:  \d+
+
+
+bo_stagiaire_sendmailRappel:
+    path:  /stagiaire_sendmailRappel/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:sendmailRappel" }
+    requirements:
+        id:  \d+
+        
+
+bo_stagiaire_addtendayswithmaildate:
+    path:  /stagiaire_addtendayswithmaildate/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:addtendayswithmaildate" }
+    requirements:
+        id:  \d+
+        
+
+bo_stagiaire_addtendayswithmail:
+    path:  /stagiaire_addtendayswithmail/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:addtendayswithmail" }
+    requirements:
+        id:  \d+
+        
+
+bo_stagiaire_addtendays:
+    path:  /stagiaire_addtendays/{id}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:addtendays" }
+    requirements:
+        id:  \d+
+
+bo_stagiaire_checkbugs:
+    path: /stagiaires_check_bugs
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:checkBugs"}
+
+bo_stagiaire_searchexcel:
+    path: /stagiaires_searchexcel/{page}
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:searchExcel", page: 1}
+    requirements:
+        page:  \d+
+
+bo_stagiaire_updateids:
+    path: /stagiaires_update_newids
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:updateNewIds"}
+
+bo_stagiaires_sendmailNewIds:
+    path:  /stagiaires_sendmailnewids
+    defaults: { _controller: "ILCBackOfficeBundle:Stagiaire:sendmailNewIds" }
+    
+

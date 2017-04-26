@@ -1,0 +1,85 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Importer une liste de stagiaires</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>importer une liste de stagiaires</h2>
+<br/>
+{% for flashMessage in app.session.flashbag.get('info') %}
+<div class="msgDivinfo">{{ flashMessage|trans|raw }}</div><br/>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('err') %}
+<div class="msgDiverr">{{ flashMessage|trans|nl2br|raw }}</div><br/>
+{% endfor %}
+<br/>
+{{form_start(sg_form, {'method':'POST', 'action': path('bo_stagiaire_import')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(sg_form.excel) }} : </td>
+		<td>{{ form_widget(sg_form.excel,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.excel) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.excel) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(sg_form)}}
+<br/>
+<br/>
+{% if (excellog is defined) and  ((excellog | length) != 0) %}
+<table id="rounded-corner" style="width: 900px">
+<thead>
+	<tr>
+		<th scope="col" class="rounded-company">&nbsp;</th>
+		<th>Ligne</th>
+		<th>Contenu Excel</th>
+		<th>Contenu Base</th>
+		<th>Message</th>
+		<th scope="col" class="rounded-q4">&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	{% for b in excellog %}
+		<tr>
+			<td>&nbsp;</td>
+			<td>{{ b.ligne }}</td>
+			<td>{{ b.id }} - {{ b.nom }} {{ b.prenom }} - {{ b.code }}</td>
+			<td>{% if b.stagiaire is defined and b.stagiaire != null %}
+					{% if b.stagiaire.username is defined %}
+						{{ b.stagiaire.username }}
+					{% endif %}
+					-
+					{% if b.stagiaire.nom is defined %}
+						{{ b.stagiaire.nom }}
+					{% endif %}
+					{% if b.stagiaire.prenom is defined %}
+						{{ b.stagiaire.prenom }}
+					{% endif %}
+				{% endif %}</td>
+			<td>{{ b.errmsg }}</td>
+			<td>&nbsp;</td>
+		</tr>
+	{% endfor %}
+</tbody>
+<tfoot>
+	<tr>
+		<td class="rounded-foot-left">&nbsp;</td>
+		<td colspan="4" align="center">&nbsp;</td>
+		<td class="rounded-foot-right">&nbsp;</td>
+	</tr>
+</tfoot>
+</table>
+{% endif %}
+{% endblock %}

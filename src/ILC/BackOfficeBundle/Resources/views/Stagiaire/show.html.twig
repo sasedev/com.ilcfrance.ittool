@@ -1,0 +1,232 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Informations Stagiaire</p>
+							<p><a href="{{ path('bo_stagiaire_sendmailRappel', {id: st.id}) }}">Rappeler par mail les paramètres de connexion</a></p>
+							<p><a href="{{ path('bo_stagiaire_addtendayswithmaildate', {id: st.id}) }}">Ajouter 10 jours de validité avec info dates</a></p>
+							<p><a href="{{ path('bo_stagiaire_addtendayswithmail', {id: st.id}) }}">Ajouter 10 jours de validité sans info dates</a></p>
+							<p><a href="{{ path('bo_stagiaire_addtendays', {id: st.id}) }}">Ajouter 10 jours de validité sans email</a></p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>Informations Stagiaire {{ st.nom }} {{ st.prenom }}</h2>
+<br/>
+{% for flashMessage in app.session.flashbag.get('info') %}
+<div class="msgDivinfo">{{ flashMessage|trans|raw }}</div><br/>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('err') %}
+<div class="msgDiverr">{{ flashMessage|trans|nl2br|raw }}</div><br/>
+{% endfor %}
+<br/>
+<table id="rounded-corner" style="width: 900px">
+<thead>
+	<tr>
+		<th scope="col" class="rounded-company">&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th scope="col" class="rounded-q4">&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Identifiant : </td>
+		<td>{{ st.username }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Mot de passe : </td>
+		<td>{{ st.clearpassword }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Date d'importation : </td>
+		<td>{{ st.dtajout | localizeddate('full', 'none', app.request.locale ) }} à {{ st.dtajout | date('H:i') }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Validité : </td>
+		<td>{{ st.dtcrea | localizeddate('full', 'none', app.request.locale ) }} à {{ st.dtcrea | date('H:i') }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Nom : </td>
+		<td>{{ st.nom }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Prénom : </td>
+		<td>{{ st.prenom }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Email : </td>
+		<td>{{ st.email }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Tel : </td>
+		<td>{{ st.tel }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Nom Manager : </td>
+		<td>{{ st.nomcontact }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Email Manager : </td>
+		<td>{{ st.emailcontact }}</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Modules : </td>
+		<td>
+{% for module in st.modules %}
+			 - <a href="{{ path('bo_module_show', {id: module.id}) }}">{{ module.code }} - {{ module.intitule }}</a> &nbsp;&nbsp; - &nbsp;&nbsp; <b><a href="{{ path('bo_stagiaire_rem_module', {id:st.id, mod:module.id}) }}" onclick="{{ 'sg.delmod.alert' | trans }}">Supprimer</a></b><br/>
+			{% endfor %}
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>Session : </td>
+		<td>
+{% for ss in st.sessions %}
+			 - <a href="{{ path('bo_session_show', {id: ss.id}) }}">{{ ss.moduleformation.code }} - {{ ss.intitule }}</a> &nbsp;&nbsp; - &nbsp;&nbsp; <b><a href="{{ path('bo_stagiaire_rem_session', {id:st.id, ses:ss.id}) }}" onclick="{{ 'sg.delses.alert' | trans }}">Supprimer</a></b><br/>
+			{% endfor %}
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+</tbody>
+<tfoot>
+	<tr>
+		<td class="rounded-foot-left">&nbsp;</td>
+		<td colspan="2" align="center">&nbsp;</td>
+		<td class="rounded-foot-right">&nbsp;</td>
+	</tr>
+</tfoot>
+</table>
+<br/><br/>
+<h2>modifier les informations du stagiaire</h2>
+<br/>
+{{form_start(sg_form, {'method':'POST', 'action': path('bo_stagiaire_show', {id:st.id})})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(sg_form.nom) }} : </td>
+		<td>{{ form_widget(sg_form.nom,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.nom) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.nom) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.prenom) }} : </td>
+		<td>{{ form_widget(sg_form.prenom,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.prenom) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.prenom) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.email) }} : </td>
+		<td>{{ form_widget(sg_form.email,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.email) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.email) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.tel) }} : </td>
+		<td>{{ form_widget(sg_form.tel,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.tel) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.tel) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.emailcontact) }} : </td>
+		<td>{{ form_widget(sg_form.emailcontact,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.emailcontact) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.emailcontact) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.nomcontact) }} : </td>
+		<td>{{ form_widget(sg_form.nomcontact,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.nomcontact) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.nomcontact) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(sg_form)}}
+<br/><br/>
+<h2>modifier la liste des modules du stagiaire</h2>
+<br/>
+{{form_start(sg_modform, {'method':'POST', 'action': path('bo_stagiaire_update_modules', {id:st.id})})}}
+<table>
+	{% if form_errors(sg_modform.modules) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_modform.modules) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_modform.modules) }} : </td>
+		<td>
+			{% for smod in sg_modform.modules %}
+			 {{ form_widget(smod) }} {{ form_label(smod) }}<br/>
+			{% endfor %}
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(sg_modform)}}
+<br/><br/>
+<h2>modifier les sessions du stagiaire</h2>
+<br/>
+<form action="{{ path('bo_stagiaire_update_sessions', {id:st.id}) }}" method="post">
+	{% for mod in st.modules %}
+	 <b>{{ mod.intitule }}</b> :
+	 {% set currsession = null %}
+	{% for sess in st.sessions %}
+		{% if sess.moduleformation.id == mod.id %}{% set currsession = sess %} <u>{{ sess.intitule }} - {{ sess.lieu }} - {{ sess.datedebut | localizeddate('full', 'none', app.request.locale ) }} à {{ sess.heuredebut|date('H:i') }}</u> {% endif %}
+	{% endfor %}
+	<br />
+	{% for mses in mod.sessions %}
+	 	<input type="radio" name="mod{{ mod.id }}" value="{{ mses.id }}"  {% if( null != currsession and currsession.id == mses.id) %}checked="checked"{% endif %} /> {{ mses.intitule }} - {{ mses.lieu }} - {{ mses.datedebut | localizeddate('full', 'none', app.request.locale ) }} {{ mses.heuredebut|date('H:i') }}  - {{ mses.dateinfo }}<br/>
+	{% endfor %}
+	<br/>
+{% endfor %}
+<input type="submit" value="Modifier">
+</form>
+<br/><br/>
+{% endblock %}

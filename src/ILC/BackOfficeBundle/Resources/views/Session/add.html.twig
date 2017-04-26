@@ -1,0 +1,149 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Ajouter une Session de formation</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>ajouter une session</h2>
+<br/>
+{{form_start(ses_form, {'method':'POST', 'action': path('bo_session_add')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(ses_form.moduleformation) }} : </td>
+		<td>{{ form_widget(ses_form.moduleformation,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.moduleformation) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.moduleformation) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.code) }} : </td>
+		<td>{{ form_widget(ses_form.code,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.code) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.code) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.intitule) }} : </td>
+		<td>{{ form_widget(ses_form.intitule,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.intitule) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.intitule) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.datedebut) }} : </td>
+		<td>{{ form_widget(ses_form.datedebut,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.datedebut) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.datedebut) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.heuredebut) }} : </td>
+		<td>{{ form_widget(ses_form.heuredebut,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.heuredebut) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.heuredebut) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.datefin) }} : </td>
+		<td>{{ form_widget(ses_form.datefin,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.datefin) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.datefin) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.heurefin) }} : </td>
+		<td>{{ form_widget(ses_form.heurefin,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.heurefin) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.heurefin) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.lieu) }} : </td>
+		<td>{{ form_widget(ses_form.lieu,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.lieu) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.lieu) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.numcontactcentre) }} : </td>
+		<td>{{ form_widget(ses_form.numcontactcentre,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.numcontactcentre) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.numcontactcentre) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.conditionsreport) }} : </td>
+		<td>{{ form_widget(ses_form.conditionsreport,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.conditionsreport) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.conditionsreport) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.dateinfo) }} : </td>
+		<td>{{ form_widget(ses_form.dateinfo,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.dateinfo) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.dateinfo) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.otherinfo) }} : </td>
+		<td>{{ form_widget(ses_form.otherinfo,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.otherinfo) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.otherinfo) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.maxparticipants) }} : </td>
+		<td>{{ form_widget(ses_form.maxparticipants,{'attr' : {'style':'width:50px;', 'maxlength':'4'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.maxparticipants) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.maxparticipants) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(ses_form.verouillage) }} : </td>
+		<td>{{ form_widget(ses_form.verouillage,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(ses_form.verouillage) %}
+	<tr>
+		<td colspan="2">{{ form_errors(ses_form.verouillage) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(ses_form)}}
+{% endblock %}

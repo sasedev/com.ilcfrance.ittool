@@ -1,0 +1,96 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Utilisez les menu ci-dessus pour accèder au différentes parties de l'interface d'administration</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Rechercher dans la base (Rapide)</h3>
+							<p>
+								<form action="{{ path('bo_stagiaire_search') }}" method="get">
+									Mot clé : <input type="text" name="q" placeholder="Keyword :" /><br/>
+									<input type="submit" value="Go">
+								</form>
+							</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Rechercher dans Excels (Lent)</h3>
+							<p>
+								<form action="{{ path('bo_stagiaire_searchexcel') }}" method="get">
+									Mot clé : <input type="text" name="q" placeholder="Keyword :" value="{{ q }}" /><br/>
+									<input type="submit" value="Go">
+								</form>
+							</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>Résultats de recherche pour : <u>{{ q }}</u> dans les fichiers Excel</h2>
+{% for flashMessage in app.session.flashbag.get('info') %}
+<div class="msgDivinfo">{{ flashMessage|trans|raw }}</div><br/>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('err') %}
+<div class="msgDiverr">{{ flashMessage|trans|nl2br|raw }}</div><br/>
+{% endfor %}
+<br/>
+<table id="rounded-corner" style="width: 900px">
+<thead>
+	<tr>
+		<th scope="col" class="rounded-company">&nbsp;</th>
+		<th>Ligne</th>
+		<th>ID</th>
+		<th>Nom</th>
+		<th>Prénom</th>
+		<th>Email</th>
+		<th>Code</th>
+		<th scope="col" class="rounded-q4">&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	{% for bf in results %}
+		{% set i = 0 %}
+		{% for b in bf %}
+		{% if i == 0 %}
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="6"><br/><br/><br/>Fichier : <a href="/upload/{{ b.filename }}">{{ b.filename }}</a> ( {{ b.filedate | localizeddate('full', 'none', app.request.locale ) }} à {{ b.filedate | date('H:m:s') }})</td>
+			<td>&nbsp;</td>
+		</tr>
+		{% endif %}
+		{% set i = i+1 %}
+		<tr>
+			<td>&nbsp;</td>
+			<td>{{ b.ligne }}</td>
+			<td>{{ b.id }}</td>
+			<td>{{ b.nom }}</td>
+			<td>{{ b.prenom }}</td>
+			<td>{{ b.email }}</td>
+			<td>{{ b.code }}</td>
+			<td>&nbsp;</td>
+		</tr>
+		{% endfor %}
+	{% endfor %}
+</tbody>
+<tfoot>
+	<tr>
+		<td class="rounded-foot-left">&nbsp;</td>
+		<td colspan="6" align="center">&nbsp;</td>
+		<td class="rounded-foot-right">&nbsp;</td>
+	</tr>
+</tfoot>
+</table>
+{% endblock %}

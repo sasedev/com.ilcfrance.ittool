@@ -1,0 +1,59 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Ajouter un Module</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>ajouter un Module</h2>
+<br/>
+{{form_start(mod_form, {'method':'POST', 'action': path('bo_module_add')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(mod_form.groupmodule) }} : </td>
+		<td>{{ form_widget(mod_form.groupmodule,{'attr' : {'style':'width:400px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(mod_form.groupmodule) %}
+	<tr>
+		<td colspan="2">{{ form_errors(mod_form.groupmodule) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(mod_form.code) }} : </td>
+		<td>{{ form_widget(mod_form.code,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(mod_form.code) %}
+	<tr>
+		<td colspan="2">{{ form_errors(mod_form.code) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(mod_form.intitule) }} : </td>
+		<td>{{ form_widget(mod_form.intitule,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(mod_form.intitule) %}
+	<tr>
+		<td colspan="2">{{ form_errors(mod_form.intitule) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(mod_form.description) }} : </td>
+		<td>{{ form_widget(mod_form.description,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(mod_form.description) %}
+	<tr>
+		<td colspan="2">{{ form_errors(mod_form.description) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(mod_form)}}
+{% endblock %}

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block pagetitle %}{{ pagetitle }} - ILC Administration {%
+	endblock %}</title>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+<link href="/res/admin/css/style.css" rel="stylesheet" type="text/css">
+<script src="/res/js/jquery.1.8.3.js" type="text/javascript"></script>
+<script type="text/javascript" src="/res/tinymce/jquery.tinymce.js"></script>
+<script type="text/javascript">
+	$(document)
+      .ready(
+          function() {
+
+	          $('.wysiwyg')
+	              .each(
+	                  function() {
+		                  var options =
+		                      {
+		                        script_url : "/res/js/tinymce/tiny_mce.js",
+		                        theme : "advanced",
+		                        plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",
+		                        theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+		                        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		                        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		                        theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak",
+		                        theme_advanced_toolbar_location : "top",
+		                        theme_advanced_toolbar_align : "left",
+		                        theme_advanced_statusbar_location : "bottom",
+		                        theme_advanced_resizing : true,
+		                        content_css : "/res/admin/css/style.css",
+		                        verify_html : false,
+		                      };
+		                  $this = $(this);
+		                  // fix tinymce bug
+		                  if ($this.is('[required]')) {
+			                  options.oninit = function(editor) {
+				                  editor.onChange.add(function(ed, l) {
+					                  ed.save();
+				                  });
+			                  };
+		                  }
+		                  $this.tinymce(options);
+	                  });
+          });
+</script>
+</head>
+<body>
+	<div id="main_container">
+		<div class="header">
+			<div class="right_header">
+				<a href="{{ path('_security_logout') }}" class="logout">Logout</a>
+			</div>
+		</div>
+		<div class="main_content">
+			<div class="menu">
+				<ul>
+					<li><a href="{{ path("bo_home") }}">Admin Acceuil</a></li>
+					<li><a href="{{ path("bo_groupemodules_list") }}">Liste des
+							Modules</a>
+						<ul>
+							<li><a href="{{ path('bo_session_bydate') }}">Sessions par date</a></li>
+							<li><a href="{{ path('bo_modules_export') }}">Exporter Liste
+									Excel</a></li>
+							<li><a href="{{ path('bo_groupemodules_add') }}">Ajouter
+									Groupement Modules</a></li>
+							<li><a href="{{ path('bo_module_add') }}">Ajouter un Module</a></li>
+							<li><a href="{{ path('bo_session_add') }}">Ajouter une Session</a></li>
+						</ul></li>
+					<li><a href="{{ path("bo_stagiaire_list") }}">Liste des Stagiaires</a>
+						<ul>
+							<li><a href="{{ path('bo_stagiaire_import') }}">Importer des
+									Stagaires</a></li>
+							<li><a href="{{ path('bo_stagiaire_add') }}">Ajouter
+									manuellement Stagaire</a></li>
+							<li><a href="{{ path('bo_stagiaires_sendmailParams') }}">Envoyer
+									infos de connexion</a></li>
+							<li><a href="{{ path('bo_stagiaire_checkbugs') }}">Détection de
+									bugs Excel</a></li>
+						</ul></li>
+					<li><a href="{{ path("bo_admin_list") }}">Liste des
+							Administrateurs</a>
+						<ul>
+							<li><a href="{{ path('bo_admin_add') }}">Ajouter Administrateur</a></li>
+						</ul></li>
+					<li><a href="{{ path("_security_profile") }}">Mon Profil</a></li>
+				</ul>
+			</div>
+			<div class="center_content">
+				<div class="left_content">
+					{% block left %}
+					<div class="sidebarmenu">
+						<a class="menuitem submenuheader" href="">Subcategories</a>
+						<div class="submenu">
+							<ul>
+								<li><a href="">Sidebar submenu</a></li>
+								<li><a href="">Sidebar submenu</a></li>
+								<li><a href="">Sidebar submenu</a></li>
+								<li><a href="">Sidebar submenu</a></li>
+								<li><a href="">Sidebar submenu</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>User help desk</h3>
+							<img src="../images/info.png" alt="" title="" class="sidebar_icon_right" />
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+					{% endblock %}
+				</div>
+				<div class="right_content">
+					{% block main %}
+					<h2>Products Categories Settings</h2>
+					<table id="rounded-corner" summary="2007 Major IT Companies' Profit">
+						<thead>
+							<tr>
+								<th scope="col" class="rounded-company"></th>
+								<th scope="col" class="rounded">Product</th>
+								<th scope="col" class="rounded">Details</th>
+								<th scope="col" class="rounded">Price</th>
+								<th scope="col" class="rounded">Date</th>
+								<th scope="col" class="rounded">Edit</th>
+								<th scope="col" class="rounded-q4">Delete</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<td colspan="6" class="rounded-foot-left"><em>Lorem ipsum
+										dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+										incididunt ut.</em></td>
+								<td class="rounded-foot-right">&nbsp;</td>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td><input type="checkbox" name="" /></td>
+								<td>Product name</td>
+								<td>details</td>
+								<td>150$</td>
+								<td>12/05/2010</td>
+								<td><a href="#"><img src="../images/user_edit.png" alt=""
+										title="" border="0"
+									/></a></td>
+								<td><a href="#" class="ask"><img src="../images/trash.png"
+										alt="" title="" border="0"
+									/></a></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="" /></td>
+								<td>Product name</td>
+								<td>details</td>
+								<td>150$</td>
+								<td>12/05/2010</td>
+								<td><a href="#"><img src="../images/user_edit.png" alt=""
+										title="" border="0"
+									/></a></td>
+								<td><a href="#" class="ask"><img src="../images/trash.png"
+										alt="" title="" border="0"
+									/></a></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="" /></td>
+								<td>Product name</td>
+								<td>details</td>
+								<td>150$</td>
+								<td>12/05/2010</td>
+								<td><a href="#"><img src="../images/user_edit.png" alt=""
+										title="" border="0"
+									/></a></td>
+								<td><a href="#" class="ask"><img src="../images/trash.png"
+										alt="" title="" border="0"
+									/></a></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="" /></td>
+								<td>Product name</td>
+								<td>details</td>
+								<td>150$</td>
+								<td>12/05/2010</td>
+								<td><a href="#"><img src="../images/user_edit.png" alt=""
+										title="" border="0"
+									/></a></td>
+								<td><a href="#" class="ask"><img src="../images/trash.png"
+										alt="" title="" border="0"
+									/></a></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="" /></td>
+								<td>Product name</td>
+								<td>details</td>
+								<td>150$</td>
+								<td>12/05/2010</td>
+								<td><a href="#"><img src="../images/user_edit.png" alt=""
+										title="" border="0"
+									/></a></td>
+								<td><a href="#" class="ask"><img src="../images/trash.png"
+										alt="" title="" border="0"
+									/></a></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox" name="" /></td>
+								<td>Product name</td>
+								<td>details</td>
+								<td>150$</td>
+								<td>12/05/2010</td>
+								<td><a href="#"><img src="../images/user_edit.png" alt=""
+										title="" border="0"
+									/></a></td>
+								<td><a href="#" class="ask"><img src="../images/trash.png"
+										alt="" title="" border="0"
+									/></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<a href="#" class="bt_green"><span class="bt_green_lft"></span><strong>Add
+							new item</strong><span class="bt_green_r"></span></a> <a href="#" class="bt_blue"><span
+						class="bt_blue_lft"
+					></span><strong>View all items from category</strong><span class="bt_blue_r"></span></a>
+					<a href="#" class="bt_red"><span class="bt_red_lft"></span><strong>Delete
+							items</strong><span class="bt_red_r"></span></a>
+					<div class="pagination">
+						<span class="disabled">&lt;&lt; prev</span><span class="current">1</span><a
+							href=""
+						>2</a><a href="">3</a><a href="">4</a><a href="">5</a>…<a href="">10</a><a
+							href=""
+						>11</a><a href="">12</a>...<a href="">100</a><a href="">101</a><a href="">next
+							&gt;&gt;</a>
+					</div>
+					<h2>Warning Box examples</h2>
+					<div class="warning_box">Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit, sed do eiusmod tempor incididunt ut.</div>
+					<div class="valid_box">Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit, sed do eiusmod tempor incididunt ut.</div>
+					<div class="error_box">Lorem ipsum dolor sit amet, consectetur
+						adipisicing elit, sed do eiusmod tempor incididunt ut.</div>
+					<h2>Nice Form example</h2>
+					<div class="form">
+						<form action="" method="post" class="niceform">
+							<fieldset>
+								<dl>
+									<dt>
+										<label for="email">Email Address:</label>
+									</dt>
+									<dd>
+										<input type="text" name="" id="" size="54" />
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label for="password">Password:</label>
+									</dt>
+									<dd>
+										<input type="text" name="" id="" size="54" />
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label for="gender">Select categories:</label>
+									</dt>
+									<dd>
+										<select size="1" name="gender" id="">
+											<option value="">Select option 1</option>
+											<option value="">Select option 2</option>
+											<option value="">Select option 3</option>
+											<option value="">Select option 4</option>
+											<option value="">Select option 5</option>
+										</select>
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label for="interests">Select tags:</label>
+									</dt>
+									<dd>
+										<input type="checkbox" name="interests[]" id="" value="" /><label
+											class="check_label"
+										>Web design</label> <input type="checkbox" name="interests[]" id="" value="" /><label
+											class="check_label"
+										>Business</label> <input type="checkbox" name="interests[]" id="" value="" /><label
+											class="check_label"
+										>Simple</label> <input type="checkbox" name="interests[]" id="" value="" /><label
+											class="check_label"
+										>Clean</label>
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label for="color">Select type</label>
+									</dt>
+									<dd>
+										<input type="radio" name="type" id="" value="" /><label
+											class="check_label"
+										>Basic</label> <input type="radio" name="type" id="" value="" /><label
+											class="check_label"
+										>Medium</label> <input type="radio" name="type" id="" value="" /><label
+											class="check_label"
+										>Premium</label>
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label for="upload">Upload a File:</label>
+									</dt>
+									<dd>
+										<input type="file" name="upload" id="upload" />
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label for="comments">Message:</label>
+									</dt>
+									<dd>
+										<textarea name="comments" id="comments" rows="5" cols="36"></textarea>
+									</dd>
+								</dl>
+								<dl>
+									<dt>
+										<label></label>
+									</dt>
+									<dd>
+										<input type="checkbox" name="interests[]" id="" value="" /><label
+											class="check_label"
+										>I agree to the <a href="#">terms &amp; conditions</a></label>
+									</dd>
+								</dl>
+								<dl class="submit">
+									<input type="submit" name="submit" id="submit"
+										value="Envoyer fddff sdrsfs"
+									/>
+								</dl>
+							</fieldset>
+						</form>
+					</div>
+					{% endblock %}
+				</div>
+				<!-- end of right content-->
+			</div>
+			<!--end of center content -->
+			<div class="clear"></div>
+		</div>
+		<!--end of main content-->
+		<div class="footer">
+			<div class="left_footer"></div>
+			<div class="right_footer"></div>
+		</div>
+	</div>
+</body>
+</html>

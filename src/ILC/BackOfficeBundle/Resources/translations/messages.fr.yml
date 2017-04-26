@@ -1,0 +1,52 @@
+Oui: Oui
+Non: Non
+user.id: Identifiant
+user.password: Mot de passe
+user.rememberme.label: Se souvenir de moi
+user.loginbtn: Se Connecter
+"Bad credentials.": "Identifiant ou mot de passe incorrect"
+gm.name: Nom
+gm.del.alert: return confirm('Vous voulez réellement supprimer ce groupement de module et tous ses modules/sessions/préinscrits/inscrits ?');
+
+mf.groupmodule: Groupe
+mf.code: Code
+mf.intitule: Intitulé
+mf.description: Description
+module.del.alert: return confirm('Vous voulez réellement supprimer ce module et toutes ses sessions/inscrits ?');
+
+sf.moduleformation: Module
+sf.code: Code
+sf.intitule: Intitulé
+sf.datedebut: Date de début
+sf.heuredebut: Heure de début
+sf.datefin: Date de fin
+sf.heurefin: Heure de fin
+sf.lieu: Lieu
+sf.numcontactcentre: Numéro contact au centre de formation
+sf.conditionsreport: Conditions de report
+sf.dateinfo: Informations supplémentaire de date
+sf.otherinfo: Autres informations
+sf.maxparticipants: Nombre de participants maximum
+sf.verouillage: Vérrouillé
+ses.del.alert: return confirm('Vous voulez réellement supprimer cette session et touts ses inscrits ?');
+
+st.username: Matricule
+st.code: Matricule
+st.nom: Nom
+st.prenom: Prenom
+st.email: Email
+st.tel: Tel
+st.emailcontact: Email Manager
+st.nomcontact: Nom Manager
+st.excel: Fichier Excel
+sg.del.alert: return confirm('Vous voulez réellement supprimer ce stagiaire ?');
+sg.delmod.alert: return confirm('Vous voulez réellement désaffecter ce stagiaire de ce module ?');
+sg.delses.alert: return confirm('Vous voulez réellement désaffecter ce stagiaire de cette session ?');
+
+adm.name: Nom
+adm.email: Email
+adm.username: Identifiant
+adm.passwd: Mot de passe
+adm.password: Nouveau Mot de passe
+adm.cpasswd: Confirmation Mot de passe 
+adm.del.alert: return confirm('Vous voulez réellement supprimer cet administrateur ?');

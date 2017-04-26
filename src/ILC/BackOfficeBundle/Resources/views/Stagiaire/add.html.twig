@@ -1,0 +1,86 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Ajouter manuallement un stagiaire</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>ajouter manuellement un stagiaire</h2>
+<br/>
+{{form_start(sg_form, {'method':'POST', 'action': path('bo_stagiaire_add')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(sg_form.username) }} : </td>
+		<td>{{ form_widget(sg_form.username,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.username) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.username) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.nom) }} : </td>
+		<td>{{ form_widget(sg_form.nom,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.nom) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.nom) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.prenom) }} : </td>
+		<td>{{ form_widget(sg_form.prenom,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.prenom) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.prenom) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.email) }} : </td>
+		<td>{{ form_widget(sg_form.email,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.email) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.email) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.tel) }} : </td>
+		<td>{{ form_widget(sg_form.tel,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.tel) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.tel) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.emailcontact) }} : </td>
+		<td>{{ form_widget(sg_form.emailcontact,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.emailcontact) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.emailcontact) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(sg_form.nomcontact) }} : </td>
+		<td>{{ form_widget(sg_form.nomcontact,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(sg_form.nomcontact) %}
+	<tr>
+		<td colspan="2">{{ form_errors(sg_form.nomcontact) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(sg_form)}}
+{% endblock %}

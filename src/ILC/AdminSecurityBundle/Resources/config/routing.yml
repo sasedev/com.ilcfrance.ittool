@@ -1,0 +1,11 @@
+_security_login:
+    path:  /login
+    defaults: { _controller: "ILCAdminSecurityBundle:Security:login" }
+
+_security_check:
+    path:  /login_check
+    methods: [POST]
+
+
+_security_logout:
+    path:  /logout

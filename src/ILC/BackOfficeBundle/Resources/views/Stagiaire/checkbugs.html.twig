@@ -1,0 +1,93 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Utilisez les menu ci-dessus pour accèder au différentes parties de l'interface d'administration</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Rechercher dans la base (Rapide)</h3>
+							<p>
+								<form action="{{ path('bo_stagiaire_search') }}" method="get">
+									Mot clé : <input type="text" name="q" placeholder="Keyword :" /><br/>
+									<input type="submit" value="Go">
+								</form>
+							</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Rechercher dans Excels (Lent)</h3>
+							<p>
+								<form action="{{ path('bo_stagiaire_searchexcel') }}" method="get">
+									Mot clé : <input type="text" name="q" placeholder="Keyword :" /><br/>
+									<input type="submit" value="Go">
+								</form>
+							</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>Détection de bugs dans les fichiers Excel en ligne</h2>
+<br/>
+{% for flashMessage in app.session.flashbag.get('info') %}
+<div class="msgDivinfo">{{ flashMessage|trans|raw }}</div><br/>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('err') %}
+<div class="msgDiverr">{{ flashMessage }}</div><br/>
+{% endfor %}
+<br/>
+<table id="rounded-corner" style="width: 900px">
+<thead>
+	<tr>
+		<th scope="col" class="rounded-company">&nbsp;</th>
+		<th>Ligne</th>
+		<th>Contenu Excel</th>
+		<th>Contenu Base</th>
+		<th>Message</th>
+		<th scope="col" class="rounded-q4">&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	{% for bf in bugs %}
+		{% set i = 0 %}
+		{% for b in bf %}
+		{% if i == 0 %}
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="4"><br/><br/><br/>Fichier : <a href="/upload/{{ b.filename }}">{{ b.filename }}</a> ( {{ b.filedate | localizeddate('full', 'none', app.request.locale ) }} à {{ b.filedate | date('H:m:s') }})</td>
+			<td>&nbsp;</td>
+		</tr>
+		{% endif %}
+		{% set i = i+1 %}
+		<tr>
+			<td>&nbsp;</td>
+			<td>{{ b.ligne }}</td>
+			<td>{{ b.exId }} - {{ b.exNom }} {{ b.exPrenom }}</td>
+			<td>{{ b.dbUsername }} - {{ b.dbNom }} {{ b.dbPrenom }} {% if null != b.dbDtvalid %}{{ b.dbDtvalid | localizeddate('full', 'none', app.request.locale ) }}{% endif %}</td>
+			<td>{{ b.errmsg }}</td>
+			<td>&nbsp;</td>
+		</tr>
+		{% endfor %}
+	{% endfor %}
+</tbody>
+<tfoot>
+	<tr>
+		<td class="rounded-foot-left">&nbsp;</td>
+		<td colspan="4" align="center">&nbsp;</td>
+		<td class="rounded-foot-right">&nbsp;</td>
+	</tr>
+</tfoot>
+</table>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>ajouter un ouvel Administrateur</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>ajouter un ouvel Administrateur</h2>
+<br/>
+{{form_start(adm_form, {'method':'POST', 'action': path('bo_admin_add')})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(adm_form.username) }} : </td>
+		<td>{{ form_widget(adm_form.username,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(adm_form.username) %}
+	<tr>
+		<td colspan="2">{{ form_errors(adm_form.username) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(adm_form.password) }} : </td>
+		<td>{{ form_widget(adm_form.password,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(adm_form.password) %}
+	<tr>
+		<td colspan="2">{{ form_errors(adm_form.password) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(adm_form.name) }} : </td>
+		<td>{{ form_widget(adm_form.name,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(adm_form.name) %}
+	<tr>
+		<td colspan="2">{{ form_errors(adm_form.name) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td align="right">{{ form_label(adm_form.email) }} : </td>
+		<td>{{ form_widget(adm_form.email,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(adm_form.email) %}
+	<tr>
+		<td colspan="2">{{ form_errors(adm_form.email) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(adm_form)}}
+{% endblock %}

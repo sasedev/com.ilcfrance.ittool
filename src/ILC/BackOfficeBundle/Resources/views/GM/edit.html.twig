@@ -1,0 +1,32 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Ajouter un groupement de Modules</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>modifier le Groupement de Module : <u>{{ gm.name }}</u></h2>
+<br/>
+{{form_start(gm_form, {'method':'POST', 'action': path('bo_groupemodules_edit', {id: gm.id})})}}
+<table>
+	<tr>
+		<td align="right">{{ form_label(gm_form.name) }} : </td>
+		<td>{{ form_widget(gm_form.name,{'attr' : {'style':'width:200px;'}} ) }}</td>
+	</tr>
+	{% if form_errors(gm_form.name) %}
+	<tr>
+		<td colspan="2">{{ form_errors(gm_form.name) }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td colspan="2" align="center"><input name="Submit" type="submit" class="button" value=" Submit " /></td>
+	</tr>
+</table>
+{{form_end(gm_form)}}
+{% endblock %}

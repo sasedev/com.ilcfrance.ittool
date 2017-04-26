@@ -1,0 +1,7 @@
+ilc_admin_security:
+    resource: "@ILCAdminSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ilc_back_office:
+    resource: "@ILCBackOfficeBundle/Resources/config/routing.yml"
+    prefix:   /

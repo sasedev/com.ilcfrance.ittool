@@ -1,0 +1,46 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Aperçu des modules de formation</p>
+							<p><a href="{{ path('bo_session_bydate') }}">Affichage Sessions par date</a></p>
+
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>Liste des Modules</h2>
+<br/>
+{% for gm in gms %}
+	<b>{{ gm.name }}</b> - (<a href="{{ path('bo_groupemodules_edit', {id: gm.id}) }}">Modifier</a> | <a href="{{ path('bo_groupemodules_del', {id: gm.id}) }}" onclick="{{ 'gm.del.alert' | trans }}">Supprimer</a>)<br/>
+	{% if (gm.modules | length) != 0 %}<ul>
+		{% for module in gm.modules %}
+		 <li><b>({{ module.code }})</b> &nbsp; {{ module.intitule }}  - (<a href="{{ path('bo_module_show', {id: module.id}) }}">Détail</a> | <a href="{{ path('bo_module_del', {id: module.id}) }}" onclick="{{ 'module.del.alert' | trans }}">Supprimer</a>)<br/>
+		  {% set totalinscrits = 0 %}
+		  {% if (module.sessions | length) != 0 %}
+		    {% for sf in module.sessions %}
+		      {% set totalinscrits = totalinscrits + (sf.stagiaires | length) %}
+		 	  {% endfor %}
+		  {% endif %}
+		  <u><b><i>{{ totalinscrits }} inscrits / {{ module.stagiaires | length }} préinscrits</i></b></u><br/><br/>
+		 {% if (module.sessions | length) != 0 %}
+		 <ul>
+		 	{% for sf in module.sessions %}
+		 	 <li><b>({{ sf.code }})</b> &nbsp; {{ sf.intitule }} - (<a href="{{ path('bo_session_show', {id: sf.id}) }}">Détail</a> | <a href="{{ path('bo_session_del', {id: sf.id}) }}" onclick="{{ 'ses.del.alert' | trans }}">Supprimer</a>)<br/>
+		 	 		<i>du {{ sf.datedebut| localizeddate('full', 'none', app.request.locale ) }} à {{ sf.heuredebut|date('H:i') }} au {{ sf.datefin| localizeddate('full', 'none', app.request.locale ) }} à {{ sf.heurefin|date('H:i') }}</i><br/>
+		 	 <u><b><i>{{ sf.stagiaires | length }} / {{ sf.maxparticipants }} inscrits</i></b></u><br/><br/>
+		 	 </li>
+		 	{% endfor %}
+		 </ul>
+		 {% endif %}
+		 </li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<br/><br/>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,36 @@
+<html>
+<body>
+	<br /> Madame, Monsieur,
+	<br />
+	<br /> Dans le cadre de votre Parcours de Formation d’anglais pour l’année
+	{{'now'|date('Y')}}
+	<br />
+	<b>Module : {{ session.moduleformation.intitule }}</b>.
+	{%if session.moduleformation.description is not empty%}<br/>{{session.moduleformation.description}}<br/>{%endif%}
+	<br /> vous êtes prié de vous présenter le
+	<b>{{ session.datedebut| localizeddate('full', 'none', app.request.locale ) }}</b>
+	<br /> Date de début :
+	<b>{{ session.datedebut| localizeddate('full', 'none', app.request.locale ) }} à {{ session.heuredebut|date('H:i')
+		}}</b>.
+	<br /> Date de fin :
+	<b>{{ session.datefin| localizeddate('full', 'none', app.request.locale ) }} à {{ session.heurefin|date('H:i') }}</b>.
+	<br /> à l’adresse suivante :
+	<br />
+	<b>ILC France-IH Paris<br /> 13, passage Dauphine (entrée du passage au 30
+		rue Dauphine)<br /> 75006 Paris 3ème étage
+	</b>
+	<br />
+	<br /> Plan ci-joint :
+	<br />
+	<img alt="Plan" src="{{ plan }}">
+	<br />
+	<br /> Veuillez agréer, Madame, Monsieur, l’expression de nos sincères
+	salutations.
+	<br />
+	<br /> Léa Paolini
+	<br /> Direction des Projets et Organisation
+	<br /> Tél : 01 44 41 80 22
+	<br /> Email : lea.paolini@ilcfrance.com
+	<br />
+</body>
+</html>

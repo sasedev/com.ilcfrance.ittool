@@ -1,0 +1,50 @@
+{% extends 'ILCBackOfficeBundle::template.html.twig' %}
+{% block left %}
+<br/><br/>
+<div class="sidebar_box">
+						<div class="sidebar_box_top"></div>
+						<div class="sidebar_box_content">
+							<h3>Info</h3>
+							<p>Utilisez les menu ci-dessus pour accèder au différentes parties de l'interface d'administration</p>
+						</div>
+						<div class="sidebar_box_bottom"></div>
+					</div>
+{% endblock %}
+{% block main %}
+<h2>Liste des Administrateurs</h2>
+<br/>
+<br/>
+<table id="rounded-corner" style="width: 900px">
+<thead>
+	<tr>
+		<th scope="col" class="rounded-company">&nbsp;</th>
+		<th>Nom :</th>
+		<th>Login :</th>
+		<th>Email :</th>
+		<th scope="col" class="rounded" align="center">Actions</th>
+		<th scope="col" class="rounded-q4">&nbsp;</th>
+	</tr>
+</thead>
+<tbody>
+	{% for a in admins %}
+	<tr>
+		<td>&nbsp;</td>
+		<td>{{ a.name }}</td>
+		<td>{{ a.username }}</td>
+		<td>{{ a.email }}</td>
+		<td align="center">
+			{% if admin.id == a.id %}<a href="{{ path('_security_profile') }}">Details</a>{% else %}<a href="{{ path('bo_admin_del', {id:a.id}) }}" onclick="{{ 'adm.del.alert' | trans }}">Supprimer</a>{% endif %}
+		</td>
+		<td>&nbsp;</td>
+	</tr>
+	{% endfor %}
+</tbody>
+<tfoot>
+	<tr>
+		<td class="rounded-foot-left">&nbsp;</td>
+		<td colspan="4" align="center">&nbsp;</td>
+		<td class="rounded-foot-right">&nbsp;</td>
+	</tr>
+</tfoot>
+</table>
+{% endblock %}

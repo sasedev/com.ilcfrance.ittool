@@ -48,4 +48,13 @@ class StagiaireImportForm extends AbstractType
 	{
 		return 'stagiaireimportform';
 	}
+
+	/**
+	 *
+	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
+	 */
+	public function getBlockPrefix()
+	{
+		return $this->getName();
+	}
 }

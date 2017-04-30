@@ -50,6 +50,15 @@ class AdministratorAddForm extends AbstractType
 
 	/**
 	 *
+	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
+	 */
+	public function getBlockPrefix()
+	{
+		return $this->getName();
+	}
+
+	/**
+	 *
 	 * @param array $options
 	 * @return multitype:
 	 */
